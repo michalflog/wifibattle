@@ -1,0 +1,104 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Area2D",
+"class": "bullet",
+"language": "GDScript",
+"path": "res://scripts/bullet.gd"
+}, {
+"base": "Reference",
+"class": "character",
+"language": "GDScript",
+"path": "res://scripts/character.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "enemy",
+"language": "GDScript",
+"path": "res://scripts/enemy.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "player",
+"language": "GDScript",
+"path": "res://scripts/player.gd"
+}, {
+"base": "Node",
+"class": "timer",
+"language": "GDScript",
+"path": "res://scripts/timer.gd"
+}, {
+"base": "Node",
+"class": "waves",
+"language": "GDScript",
+"path": "res://scripts/waves.gd"
+} ]
+_global_script_class_icons={
+"bullet": "",
+"character": "",
+"enemy": "",
+"player": "",
+"timer": "",
+"waves": ""
+}
+
+[application]
+
+config/name="WifiBattle"
+run/main_scene="res://scenes/lobby.tscn"
+config/icon="res://icon.png"
+config/auto_accept_quit=false
+config/quit_on_go_back=false
+
+[autoload]
+
+multi_game="*res://scripts/multi_game.gd"
+signals="*res://scripts/signals.gd"
+game_config="*res://scripts/game_config.gd"
+single_game="*res://scripts/single_game.gd"
+
+[debug]
+
+settings/stdout/verbose_stdout=true
+
+[display]
+
+window/stretch/mode="2d"
+window/stretch/aspect="keep_height"
+
+[input]
+
+jump={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+ ]
+}
+left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
+shoot={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+quality/2d/use_pixel_snap=true
+vram_compression/import_etc=true
+quality/depth/hdr=false
+environment/default_environment="res://default_env.tres"

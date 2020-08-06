@@ -1,0 +1,298 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://gfx/button_arrow_right_pressed.png" type="Texture" id=1]
+[ext_resource path="res://gfx/button_shoot_pressed.png" type="Texture" id=2]
+[ext_resource path="res://gfx/button_shoot.png" type="Texture" id=3]
+[ext_resource path="res://gfx/button_arrow_up.png" type="Texture" id=4]
+[ext_resource path="res://gfx/button_arrow_up_pressed.png" type="Texture" id=5]
+[ext_resource path="res://fonts/font_20.tres" type="DynamicFont" id=6]
+[ext_resource path="res://gfx/button_arrow_left_pressed.png" type="Texture" id=7]
+[ext_resource path="res://gfx/button_arrow_right.png" type="Texture" id=8]
+[ext_resource path="res://gfx/button_arrow_left.png" type="Texture" id=9]
+[ext_resource path="res://gfx/HpBarOver.png" type="Texture" id=10]
+[ext_resource path="res://gfx/HpBarUnder.png" type="Texture" id=11]
+[ext_resource path="res://gfx/HpBarProgress.png" type="Texture" id=12]
+[ext_resource path="res://scripts/in_single_game_ui.gd" type="Script" id=13]
+[ext_resource path="res://fonts/Bungee-Regular.ttf" type="DynamicFontData" id=14]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+extra_spacing_char = 1
+font_data = ExtResource( 14 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+extra_spacing_char = 1
+font_data = ExtResource( 14 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 30
+extra_spacing_char = 1
+font_data = ExtResource( 14 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 1
+extra_spacing_char = 1
+font_data = ExtResource( 14 )
+
+[sub_resource type="Animation" id=5]
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer2/VBoxContainer/flower_hp:tint_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0.46, 0.46, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0.46, 0.46, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 1.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer/score:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("timer_container/timer:custom_fonts/font:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 80, -0.25, 0, 0.25, 0, 80, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3, 0.9 )
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("timer_container/timer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("timer_container/timer_name:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="in_game_ui" type="CanvasLayer"]
+script = ExtResource( 13 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -53.5
+margin_top = 40.0
+margin_right = 53.5
+margin_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_right = 107.0
+margin_bottom = 31.0
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 1 )
+text = "Score"
+align = 1
+
+[node name="score" type="Label" parent="VBoxContainer"]
+margin_top = 35.0
+margin_right = 107.0
+margin_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = SubResource( 2 )
+text = "0"
+align = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 40.0
+margin_bottom = 40.0
+custom_constants/separation = 40
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2"]
+margin_right = 200.0
+margin_bottom = 65.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="flower_hp" type="TextureProgress" parent="VBoxContainer2/VBoxContainer"]
+margin_right = 200.0
+margin_bottom = 40.0
+size_flags_horizontal = 4
+value = 100.0
+texture_under = ExtResource( 11 )
+texture_over = ExtResource( 10 )
+texture_progress = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer2/VBoxContainer"]
+margin_left = 6.0
+margin_top = 44.0
+margin_right = 194.0
+margin_bottom = 65.0
+size_flags_horizontal = 4
+custom_fonts/font = ExtResource( 6 )
+text = "Flower Health"
+align = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer2"]
+margin_left = 68.0
+margin_top = 105.0
+margin_right = 131.0
+margin_bottom = 151.0
+size_flags_horizontal = 4
+alignment = 2
+
+[node name="Label" type="Label" parent="VBoxContainer2/VBoxContainer2"]
+margin_right = 63.0
+margin_bottom = 21.0
+custom_fonts/font = ExtResource( 6 )
+text = "Wave"
+
+[node name="wave_num" type="Label" parent="VBoxContainer2/VBoxContainer2"]
+margin_top = 25.0
+margin_right = 63.0
+margin_bottom = 46.0
+custom_fonts/font = ExtResource( 6 )
+text = "0"
+align = 1
+
+[node name="move_buttons" type="HBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = -20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="move_left_button" type="TouchScreenButton" parent="move_buttons"]
+position = Vector2( 0, -192 )
+normal = ExtResource( 9 )
+pressed = ExtResource( 7 )
+action = "left"
+visibility_mode = 1
+
+[node name="move_right_button" type="TouchScreenButton" parent="move_buttons"]
+position = Vector2( 192, -192 )
+normal = ExtResource( 8 )
+pressed = ExtResource( 1 )
+action = "right"
+visibility_mode = 1
+
+[node name="other_buttons" type="HBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_top = -20.0
+
+[node name="shoot_button" type="TouchScreenButton" parent="other_buttons"]
+position = Vector2( -384, -192 )
+normal = ExtResource( 3 )
+pressed = ExtResource( 2 )
+action = "shoot"
+visibility_mode = 1
+
+[node name="jump_button" type="TouchScreenButton" parent="other_buttons"]
+position = Vector2( -192, -192 )
+normal = ExtResource( 4 )
+pressed = ExtResource( 5 )
+action = "jump"
+visibility_mode = 1
+
+[node name="timer_container" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.3
+anchor_right = 0.5
+anchor_bottom = 0.3
+margin_left = -46.5
+margin_top = -50.5
+margin_right = 46.5
+margin_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+custom_constants/separation = 20
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="timer_name" type="Label" parent="timer_container"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 24.0
+margin_right = 93.0
+margin_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = SubResource( 3 )
+text = "name"
+align = 1
+valign = 1
+
+[node name="timer" type="Label" parent="timer_container"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 46.0
+margin_top = 75.0
+margin_right = 47.0
+margin_bottom = 77.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 4 )
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/deal_dmg = SubResource( 5 )
+
+[node name="update_score" type="AnimationPlayer" parent="."]
+anims/update_score = SubResource( 6 )
+
+[node name="timer_change" type="AnimationPlayer" parent="."]
+anims/timer_count = SubResource( 7 )

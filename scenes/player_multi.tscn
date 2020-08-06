@@ -1,0 +1,79 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scripts/player_multi.gd" type="Script" id=1]
+[ext_resource path="res://fonts/font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://gfx/HpBarProgress.png" type="Texture" id=3]
+[ext_resource path="res://gfx/HpBarUnder.png" type="Texture" id=4]
+[ext_resource path="res://gfx/outlineCrystal.png" type="Texture" id=5]
+[ext_resource path="res://gfx/HpBarOver.png" type="Texture" id=6]
+[ext_resource path="res://scenes/bullet.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/animated_sprite_blue.tscn" type="PackedScene" id=8]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, -2.19298, 0, 0, Vector2( 1, 0.0206709 ), -1.6697, 0.0, 0, 0 ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+height = 34.5166
+
+[node name="player" type="KinematicBody2D"]
+collision/safe_margin = 0.01
+script = ExtResource( 1 )
+bullet_scene = ExtResource( 7 )
+
+[node name="particles" type="CPUParticles2D" parent="."]
+position = Vector2( 0, 17 )
+emitting = false
+amount = 10
+local_coords = false
+texture = ExtResource( 5 )
+spread = 20.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 100.0
+angular_velocity = 80.0
+scale_amount = 0.5
+scale_amount_curve = SubResource( 1 )
+
+[node name="player_shape" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="animated_sprite" parent="." instance=ExtResource( 8 )]
+
+[node name="hit_box" type="Area2D" parent="."]
+
+[node name="hit_box_shape" type="CollisionShape2D" parent="hit_box"]
+shape = SubResource( 2 )
+
+[node name="shoot_position" type="Position2D" parent="."]
+position = Vector2( 20, 7 )
+
+[node name="hp_bar" type="TextureProgress" parent="."]
+margin_left = -20.0
+margin_top = -38.0
+margin_right = 180.0
+margin_bottom = 2.0
+rect_scale = Vector2( 0.2, 0.2 )
+value = 100.0
+texture_under = ExtResource( 4 )
+texture_over = ExtResource( 6 )
+texture_progress = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="player_name" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -121.908
+margin_top = -72.3476
+margin_right = 184.092
+margin_bottom = -31.3476
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 0.8, 0.8 )
+custom_fonts/font = ExtResource( 2 )
+text = "player name"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

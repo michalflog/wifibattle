@@ -1,0 +1,830 @@
+[gd_scene load_steps=56 format=2]
+
+[ext_resource path="res://scripts/lobby.gd" type="Script" id=1]
+[ext_resource path="res://gfx/background_200_200.png" type="Texture" id=2]
+[ext_resource path="res://fonts/font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://gfx/button_multi.png" type="Texture" id=4]
+[ext_resource path="res://gfx/button_multi_pressed.png" type="Texture" id=5]
+[ext_resource path="res://fonts/Bungee-Regular.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://gfx/button_join_srv_pressed.png" type="Texture" id=7]
+[ext_resource path="res://gfx/button_host_pressed.png" type="Texture" id=8]
+[ext_resource path="res://gfx/button_host.png" type="Texture" id=9]
+[ext_resource path="res://gfx/button_single_pressed.png" type="Texture" id=10]
+[ext_resource path="res://gfx/button_single.png" type="Texture" id=11]
+[ext_resource path="res://gfx/button_join_srv.png" type="Texture" id=12]
+[ext_resource path="res://gfx/button_back_pressed.png" type="Texture" id=13]
+[ext_resource path="res://gfx/button_back.png" type="Texture" id=14]
+[ext_resource path="res://gfx/button_join_pressed.png" type="Texture" id=15]
+[ext_resource path="res://gfx/button_start.png" type="Texture" id=16]
+[ext_resource path="res://gfx/button_start_pressed.png" type="Texture" id=17]
+[ext_resource path="res://gfx/button_join.png" type="Texture" id=18]
+[ext_resource path="res://gfx/playerBlue_choice.png" type="Texture" id=19]
+[ext_resource path="res://gfx/lobby_button_right_pressed.png" type="Texture" id=20]
+[ext_resource path="res://gfx/lobby_button_right.png" type="Texture" id=21]
+[ext_resource path="res://gfx/lobby_button_left_pressed.png" type="Texture" id=22]
+[ext_resource path="res://gfx/lobby_button_left.png" type="Texture" id=23]
+[ext_resource path="res://gfx/playerRed_choice.png" type="Texture" id=24]
+[ext_resource path="res://gfx/playerGrey_stand.png" type="Texture" id=25]
+[ext_resource path="res://gfx/playerGreen_choice.png" type="Texture" id=26]
+[ext_resource path="res://gfx/button_join_disabled.png" type="Texture" id=27]
+[ext_resource path="res://gfx/button_ok.png" type="Texture" id=28]
+[ext_resource path="res://gfx/accept_window.png" type="Texture" id=29]
+[ext_resource path="res://gfx/button_ok_pressed.png" type="Texture" id=30]
+[ext_resource path="res://scenes/properties.tscn" type="PackedScene" id=31]
+[ext_resource path="res://gfx/button_cancel.png" type="Texture" id=32]
+[ext_resource path="res://gfx/button_cancel_pressed.png" type="Texture" id=33]
+[ext_resource path="res://gfx/button_menu_normal.png" type="Texture" id=34]
+[ext_resource path="res://gfx/button_menu_pressed.png" type="Texture" id=35]
+[ext_resource path="res://gfx/round_volume_up_white_48dp.png" type="Texture" id=36]
+[ext_resource path="res://gfx/button_end_game_pressed.png" type="Texture" id=37]
+[ext_resource path="res://gfx/button_sound_pressed.png" type="Texture" id=38]
+[ext_resource path="res://gfx/button_end_game_normal.png" type="Texture" id=39]
+[ext_resource path="res://gfx/button_exit_game_normal.png" type="Texture" id=40]
+[ext_resource path="res://gfx/button_exit_game_pressed.png" type="Texture" id=41]
+[ext_resource path="res://gfx/button_sound_normal.png" type="Texture" id=42]
+[ext_resource path="res://gfx/round_volume_off_white_48dp.png" type="Texture" id=43]
+[ext_resource path="res://gfx/button_boost_pressed.png" type="Texture" id=44]
+[ext_resource path="res://gfx/button_load_game_normal.png" type="Texture" id=45]
+[ext_resource path="res://gfx/button_start_game_normal.png" type="Texture" id=46]
+[ext_resource path="res://gfx/button_start_game_pressed.png" type="Texture" id=47]
+[ext_resource path="res://gfx/button_load_game_pressed.png" type="Texture" id=48]
+[ext_resource path="res://gfx/button_boost_normal.png" type="Texture" id=49]
+[ext_resource path="res://gfx/button_load_game_disabled.png" type="Texture" id=50]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+extra_spacing_char = 1
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+extra_spacing_char = 1
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 35
+extra_spacing_char = 1
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 35
+extra_spacing_char = 1
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 30
+extra_spacing_char = 1
+font_data = ExtResource( 6 )
+
+[node name="lobby" type="CanvasLayer"]
+layer = 2
+script = ExtResource( 1 )
+blue_player = ExtResource( 19 )
+green_player = ExtResource( 26 )
+red_player = ExtResource( 24 )
+gray_player = ExtResource( 25 )
+audio_on = ExtResource( 36 )
+audio_off = ExtResource( 43 )
+
+[node name="main_lobby" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="buttons" type="VBoxContainer" parent="main_lobby"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -242.0
+margin_top = -100.0
+margin_right = 242.0
+margin_bottom = 100.0
+custom_constants/separation = 50
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="single_button" type="TextureButton" parent="main_lobby/buttons"]
+margin_top = 5.0
+margin_right = 492.0
+margin_bottom = 74.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource( 11 )
+texture_pressed = ExtResource( 10 )
+
+[node name="multi_button" type="TextureButton" parent="main_lobby/buttons"]
+margin_left = 11.0
+margin_top = 124.0
+margin_right = 480.0
+margin_bottom = 194.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="single_lobby" type="TextureRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_scale = Vector2( 1, 0.997462 )
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="single_lobby"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -246.5
+margin_right = -100.0
+margin_bottom = 246.5
+custom_constants/separation = 60
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="single_lobby/HBoxContainer"]
+margin_left = 65.0
+margin_right = 501.0
+margin_bottom = 493.0
+custom_constants/separation = 40
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="single_lobby/HBoxContainer/VBoxContainer2"]
+margin_top = 27.0
+margin_right = 436.0
+margin_bottom = 112.0
+custom_fonts/font = ExtResource( 3 )
+text = "Choose
+character"
+align = 1
+valign = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="single_lobby/HBoxContainer/VBoxContainer2"]
+margin_top = 152.0
+margin_right = 436.0
+margin_bottom = 352.0
+
+[node name="choose_left" type="TextureButton" parent="single_lobby/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_top = 36.0
+margin_right = 128.0
+margin_bottom = 164.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource( 23 )
+texture_pressed = ExtResource( 22 )
+
+[node name="character" type="TextureRect" parent="single_lobby/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_left = 132.0
+margin_right = 304.0
+margin_bottom = 200.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 19 )
+
+[node name="choose_right" type="TextureButton" parent="single_lobby/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_left = 308.0
+margin_top = 36.0
+margin_right = 436.0
+margin_bottom = 164.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource( 21 )
+texture_pressed = ExtResource( 20 )
+
+[node name="properties" parent="single_lobby/HBoxContainer/VBoxContainer2" instance=ExtResource( 31 )]
+margin_top = 392.0
+margin_bottom = 465.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="single_lobby/HBoxContainer"]
+margin_left = 561.0
+margin_right = 858.0
+margin_bottom = 493.0
+custom_constants/separation = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="single_lobby/HBoxContainer/VBoxContainer"]
+margin_right = 297.0
+margin_bottom = 102.0
+custom_constants/separation = 20
+
+[node name="Label" type="Label" parent="single_lobby/HBoxContainer/VBoxContainer/VBoxContainer"]
+margin_right = 297.0
+margin_bottom = 41.0
+custom_fonts/font = ExtResource( 3 )
+text = "highscore"
+align = 1
+valign = 1
+
+[node name="highscore" type="Label" parent="single_lobby/HBoxContainer/VBoxContainer/VBoxContainer"]
+margin_top = 61.0
+margin_right = 297.0
+margin_bottom = 102.0
+custom_fonts/font = ExtResource( 3 )
+text = "0"
+align = 1
+valign = 1
+
+[node name="start_game_button" type="TextureButton" parent="single_lobby/HBoxContainer/VBoxContainer"]
+margin_top = 122.0
+margin_right = 297.0
+margin_bottom = 191.0
+size_flags_horizontal = 4
+texture_normal = ExtResource( 46 )
+texture_pressed = ExtResource( 47 )
+
+[node name="load_game_button" type="TextureButton" parent="single_lobby/HBoxContainer/VBoxContainer"]
+margin_left = 9.0
+margin_top = 211.0
+margin_right = 288.0
+margin_bottom = 282.0
+size_flags_horizontal = 4
+disabled = true
+texture_normal = ExtResource( 45 )
+texture_pressed = ExtResource( 48 )
+texture_disabled = ExtResource( 50 )
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="single_lobby/HBoxContainer/VBoxContainer"]
+margin_top = 302.0
+margin_right = 297.0
+margin_bottom = 404.0
+custom_constants/separation = 10
+
+[node name="boost_button" type="TextureButton" parent="single_lobby/HBoxContainer/VBoxContainer/VBoxContainer2"]
+margin_left = 60.0
+margin_right = 237.0
+margin_bottom = 71.0
+size_flags_horizontal = 4
+texture_normal = ExtResource( 49 )
+texture_pressed = ExtResource( 44 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="single_lobby/HBoxContainer/VBoxContainer/VBoxContainer2"]
+margin_top = 81.0
+margin_right = 297.0
+margin_bottom = 102.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="single_lobby/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_left = 52.0
+margin_right = 219.0
+margin_bottom = 21.0
+custom_fonts/font = SubResource( 1 )
+text = "Boost Value:"
+align = 1
+
+[node name="boost_value" type="Label" parent="single_lobby/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_left = 229.0
+margin_right = 244.0
+margin_bottom = 21.0
+custom_fonts/font = SubResource( 2 )
+text = "0"
+
+[node name="back_button" type="TextureButton" parent="single_lobby/HBoxContainer/VBoxContainer"]
+margin_left = 74.0
+margin_top = 424.0
+margin_right = 223.0
+margin_bottom = 493.0
+size_flags_horizontal = 4
+texture_normal = ExtResource( 14 )
+texture_pressed = ExtResource( 13 )
+
+[node name="multi_lobby" type="TextureRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="margin_container" type="MarginContainer" parent="multi_lobby"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -343.5
+margin_top = -222.5
+margin_right = 343.5
+margin_bottom = 222.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="container" type="VBoxContainer" parent="multi_lobby/margin_container"]
+margin_right = 687.0
+margin_bottom = 445.0
+custom_constants/separation = 40
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="multi_lobby/margin_container/container"]
+margin_top = 59.0
+margin_right = 687.0
+margin_bottom = 166.0
+custom_constants/separation = 50
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="multi_lobby/margin_container/container/HBoxContainer"]
+margin_left = 13.0
+margin_right = 319.0
+margin_bottom = 107.0
+custom_constants/separation = 20
+
+[node name="name_label" type="Label" parent="multi_lobby/margin_container/container/HBoxContainer/VBoxContainer"]
+margin_right = 306.0
+margin_bottom = 41.0
+custom_fonts/font = ExtResource( 3 )
+text = "Player name"
+align = 1
+valign = 1
+
+[node name="name_line" type="LineEdit" parent="multi_lobby/margin_container/container/HBoxContainer/VBoxContainer"]
+margin_top = 61.0
+margin_right = 306.0
+margin_bottom = 107.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = SubResource( 3 )
+align = 1
+max_length = 15
+context_menu_enabled = false
+placeholder_text = "Name"
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="multi_lobby/margin_container/container/HBoxContainer"]
+margin_left = 369.0
+margin_right = 674.0
+margin_bottom = 107.0
+custom_constants/separation = 20
+
+[node name="server_name" type="Label" parent="multi_lobby/margin_container/container/HBoxContainer/VBoxContainer2"]
+margin_right = 305.0
+margin_bottom = 41.0
+custom_fonts/font = ExtResource( 3 )
+text = "server name"
+align = 1
+valign = 1
+
+[node name="server_line" type="LineEdit" parent="multi_lobby/margin_container/container/HBoxContainer/VBoxContainer2"]
+margin_top = 61.0
+margin_right = 305.0
+margin_bottom = 107.0
+custom_fonts/font = SubResource( 4 )
+align = 1
+context_menu_enabled = false
+placeholder_text = "server name"
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="multi_lobby/margin_container/container"]
+margin_top = 206.0
+margin_right = 687.0
+margin_bottom = 277.0
+custom_constants/separation = 40
+
+[node name="join_button" type="TextureButton" parent="multi_lobby/margin_container/container/HBoxContainer2"]
+margin_right = 324.0
+margin_bottom = 71.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture_normal = ExtResource( 12 )
+texture_pressed = ExtResource( 7 )
+
+[node name="host_button" type="TextureButton" parent="multi_lobby/margin_container/container/HBoxContainer2"]
+margin_left = 364.0
+margin_right = 687.0
+margin_bottom = 71.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 8 )
+
+[node name="multi_back_button" type="TextureButton" parent="multi_lobby/margin_container/container"]
+margin_left = 269.0
+margin_top = 317.0
+margin_right = 418.0
+margin_bottom = 386.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture_normal = ExtResource( 14 )
+texture_pressed = ExtResource( 13 )
+
+[node name="servers_lobby" type="TextureRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="container" type="VBoxContainer" parent="servers_lobby"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -235.0
+margin_top = -202.0
+margin_right = 235.0
+margin_bottom = 202.0
+custom_constants/separation = 30
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label" type="Label" parent="servers_lobby/container"]
+margin_right = 470.0
+margin_bottom = 41.0
+custom_fonts/font = ExtResource( 3 )
+text = "Servers"
+align = 1
+valign = 1
+
+[node name="servers_list" type="ItemList" parent="servers_lobby/container"]
+margin_top = 71.0
+margin_right = 470.0
+margin_bottom = 303.0
+rect_clip_content = false
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 3 )
+
+[node name="buttons" type="HBoxContainer" parent="servers_lobby/container"]
+margin_top = 333.0
+margin_right = 470.0
+margin_bottom = 404.0
+custom_constants/separation = 20
+alignment = 1
+
+[node name="servers_back_button" type="TextureButton" parent="servers_lobby/container/buttons"]
+margin_left = 76.0
+margin_right = 225.0
+margin_bottom = 69.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource( 14 )
+texture_pressed = ExtResource( 13 )
+
+[node name="servers_join_button" type="TextureButton" parent="servers_lobby/container/buttons"]
+margin_left = 245.0
+margin_right = 393.0
+margin_bottom = 71.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+disabled = true
+texture_normal = ExtResource( 18 )
+texture_pressed = ExtResource( 15 )
+texture_disabled = ExtResource( 27 )
+
+[node name="multi_game_lobby" type="TextureRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="multi_game_lobby"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -219.0
+margin_right = 512.0
+margin_bottom = 219.0
+custom_constants/separation = 20
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="multi_game_lobby/HBoxContainer"]
+margin_left = 93.0
+margin_right = 529.0
+margin_bottom = 438.0
+custom_constants/separation = 40
+alignment = 1
+
+[node name="Label" type="Label" parent="multi_game_lobby/HBoxContainer/VBoxContainer"]
+margin_right = 436.0
+margin_bottom = 85.0
+custom_fonts/font = ExtResource( 3 )
+text = "Choose
+character"
+align = 1
+valign = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="multi_game_lobby/HBoxContainer/VBoxContainer"]
+margin_top = 125.0
+margin_right = 436.0
+margin_bottom = 325.0
+
+[node name="choose_left" type="TextureButton" parent="multi_game_lobby/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_top = 36.0
+margin_right = 128.0
+margin_bottom = 164.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource( 23 )
+texture_pressed = ExtResource( 22 )
+
+[node name="character" type="TextureRect" parent="multi_game_lobby/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 132.0
+margin_right = 304.0
+margin_bottom = 200.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 19 )
+
+[node name="choose_right" type="TextureButton" parent="multi_game_lobby/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 308.0
+margin_top = 36.0
+margin_right = 436.0
+margin_bottom = 164.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource( 21 )
+texture_pressed = ExtResource( 20 )
+
+[node name="properties" parent="multi_game_lobby/HBoxContainer/VBoxContainer" instance=ExtResource( 31 )]
+margin_top = 365.0
+margin_bottom = 438.0
+
+[node name="container" type="VBoxContainer" parent="multi_game_lobby/HBoxContainer"]
+margin_left = 549.0
+margin_right = 930.0
+margin_bottom = 438.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label" type="Label" parent="multi_game_lobby/HBoxContainer/container"]
+margin_right = 381.0
+margin_bottom = 41.0
+custom_fonts/font = ExtResource( 3 )
+text = "Players"
+align = 1
+valign = 1
+
+[node name="players_list" type="ItemList" parent="multi_game_lobby/HBoxContainer/container"]
+margin_top = 61.0
+margin_right = 381.0
+margin_bottom = 349.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 3 )
+
+[node name="buttons" type="HBoxContainer" parent="multi_game_lobby/HBoxContainer/container"]
+margin_top = 369.0
+margin_right = 381.0
+margin_bottom = 438.0
+custom_constants/separation = 60
+alignment = 1
+
+[node name="game_back_button" type="TextureButton" parent="multi_game_lobby/HBoxContainer/container/buttons"]
+margin_right = 149.0
+margin_bottom = 69.0
+texture_normal = ExtResource( 14 )
+texture_pressed = ExtResource( 13 )
+
+[node name="game_start_button" type="TextureButton" parent="multi_game_lobby/HBoxContainer/container/buttons"]
+margin_left = 209.0
+margin_right = 381.0
+margin_bottom = 69.0
+disabled = true
+texture_normal = ExtResource( 16 )
+texture_pressed = ExtResource( 17 )
+
+[node name="menu" type="TextureRect" parent="."]
+visible = false
+self_modulate = Color( 1, 1, 1, 0.490196 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="rect" type="TextureRect" parent="menu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -200.0
+margin_right = 200.0
+margin_bottom = 200.0
+texture = ExtResource( 29 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="menu/rect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -134.0
+margin_top = -146.0
+margin_right = 134.0
+margin_bottom = 146.0
+custom_constants/separation = 40
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="end_game_button" type="TextureButton" parent="menu/rect/VBoxContainer"]
+margin_left = 9.0
+margin_right = 258.0
+margin_bottom = 69.0
+size_flags_horizontal = 4
+texture_normal = ExtResource( 39 )
+texture_pressed = ExtResource( 37 )
+
+[node name="exit_game_button" type="TextureButton" parent="menu/rect/VBoxContainer"]
+margin_top = 109.0
+margin_right = 268.0
+margin_bottom = 178.0
+size_flags_horizontal = 4
+texture_normal = ExtResource( 40 )
+texture_pressed = ExtResource( 41 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sound_button" type="TextureButton" parent="menu/rect/VBoxContainer"]
+margin_left = 96.0
+margin_top = 218.0
+margin_right = 172.0
+margin_bottom = 292.0
+size_flags_horizontal = 4
+texture_normal = ExtResource( 42 )
+texture_pressed = ExtResource( 38 )
+
+[node name="sound_button_texture" type="TextureRect" parent="menu/rect/VBoxContainer/sound_button"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -24.0
+margin_top = -24.0
+margin_right = 24.0
+margin_bottom = 24.0
+texture = ExtResource( 36 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="menu_button" type="TextureButton" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -120.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = 100.0
+texture_normal = ExtResource( 34 )
+texture_pressed = ExtResource( 35 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="accept_window" type="TextureRect" parent="."]
+visible = false
+self_modulate = Color( 1, 1, 1, 0.490196 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="accept_window"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -200.0
+margin_right = 200.0
+margin_bottom = 200.0
+texture = ExtResource( 29 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="accept_window/TextureRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -170.0
+margin_top = -112.0
+margin_right = 170.0
+margin_bottom = 112.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_constants/separation = 40
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="warning" type="Label" parent="accept_window/TextureRect/VBoxContainer"]
+margin_right = 340.0
+margin_bottom = 41.0
+custom_fonts/font = ExtResource( 3 )
+text = "Warning"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="text" type="Label" parent="accept_window/TextureRect/VBoxContainer"]
+margin_top = 81.0
+margin_right = 340.0
+margin_bottom = 112.0
+custom_fonts/font = SubResource( 5 )
+text = "text"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="accept_window/TextureRect/VBoxContainer"]
+margin_top = 152.0
+margin_right = 340.0
+margin_bottom = 224.0
+custom_constants/separation = 40
+alignment = 1
+
+[node name="cancel_button" type="TextureButton" parent="accept_window/TextureRect/VBoxContainer/HBoxContainer"]
+visible = false
+margin_left = 3.0
+margin_top = 1.0
+margin_right = 202.0
+margin_bottom = 70.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource( 32 )
+texture_pressed = ExtResource( 33 )
+
+[node name="accept_button" type="TextureButton" parent="accept_window/TextureRect/VBoxContainer/HBoxContainer"]
+margin_left = 122.0
+margin_right = 217.0
+margin_bottom = 72.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource( 28 )
+texture_pressed = ExtResource( 30 )
+[connection signal="pressed" from="main_lobby/buttons/single_button" to="." method="_on_single_button_pressed"]
+[connection signal="pressed" from="main_lobby/buttons/multi_button" to="." method="_on_multi_button_pressed"]
+[connection signal="pressed" from="single_lobby/HBoxContainer/VBoxContainer2/HBoxContainer/choose_left" to="." method="_on_single_choose_left_pressed"]
+[connection signal="pressed" from="single_lobby/HBoxContainer/VBoxContainer2/HBoxContainer/choose_right" to="." method="_on_single_choose_right_pressed"]
+[connection signal="pressed" from="single_lobby/HBoxContainer/VBoxContainer/start_game_button" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="single_lobby/HBoxContainer/VBoxContainer/back_button" to="." method="_on_single_back_button_pressed"]
+[connection signal="pressed" from="multi_lobby/margin_container/container/HBoxContainer2/join_button" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="multi_lobby/margin_container/container/HBoxContainer2/host_button" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="multi_lobby/margin_container/container/multi_back_button" to="." method="_on_multi_back_button_pressed"]
+[connection signal="item_selected" from="servers_lobby/container/servers_list" to="." method="_on_servers_list_item_selected"]
+[connection signal="nothing_selected" from="servers_lobby/container/servers_list" to="." method="_on_servers_list_nothing_selected"]
+[connection signal="pressed" from="servers_lobby/container/buttons/servers_back_button" to="." method="_on_servers_back_button_pressed"]
+[connection signal="pressed" from="servers_lobby/container/buttons/servers_join_button" to="." method="_on_servers_join_button_pressed"]
+[connection signal="pressed" from="multi_game_lobby/HBoxContainer/VBoxContainer/HBoxContainer/choose_left" to="." method="_on_choose_left_pressed"]
+[connection signal="pressed" from="multi_game_lobby/HBoxContainer/VBoxContainer/HBoxContainer/choose_right" to="." method="_on_choose_right_pressed"]
+[connection signal="pressed" from="multi_game_lobby/HBoxContainer/container/buttons/game_back_button" to="." method="_on_game_back_button_pressed"]
+[connection signal="pressed" from="multi_game_lobby/HBoxContainer/container/buttons/game_start_button" to="." method="_on_game_start_button_pressed"]
+[connection signal="pressed" from="menu/rect/VBoxContainer/end_game_button" to="." method="_on_end_game_button_pressed"]
+[connection signal="pressed" from="menu/rect/VBoxContainer/exit_game_button" to="." method="_on_exit_game_button_pressed"]
+[connection signal="pressed" from="menu/rect/VBoxContainer/sound_button" to="." method="_on_sound_button_pressed"]
+[connection signal="pressed" from="menu_button" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="accept_window/TextureRect/VBoxContainer/HBoxContainer/cancel_button" to="." method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="accept_window/TextureRect/VBoxContainer/HBoxContainer/accept_button" to="." method="_on_accept_button_pressed"]

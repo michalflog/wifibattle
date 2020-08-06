@@ -1,0 +1,70 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scripts/in_game_ui.gd" type="Script" id=1]
+[ext_resource path="res://gfx/button_arrow_right.png" type="Texture" id=2]
+[ext_resource path="res://gfx/button_shoot.png" type="Texture" id=3]
+[ext_resource path="res://gfx/button_arrow_up_pressed.png" type="Texture" id=4]
+[ext_resource path="res://gfx/button_arrow_left_pressed.png" type="Texture" id=5]
+[ext_resource path="res://gfx/button_shoot_pressed.png" type="Texture" id=6]
+[ext_resource path="res://gfx/button_arrow_up.png" type="Texture" id=7]
+[ext_resource path="res://gfx/button_arrow_left.png" type="Texture" id=8]
+[ext_resource path="res://gfx/button_arrow_right_pressed.png" type="Texture" id=9]
+
+[node name="in_game_ui" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="players_lifes" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+margin_top = 20.0
+margin_right = -120.0
+margin_bottom = 45.0
+custom_constants/separation = 30
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="move_buttons" type="HBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = -20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="move_left_button" type="TouchScreenButton" parent="move_buttons"]
+position = Vector2( 0, -192 )
+normal = ExtResource( 8 )
+pressed = ExtResource( 5 )
+action = "left"
+visibility_mode = 1
+
+[node name="move_right_button" type="TouchScreenButton" parent="move_buttons"]
+position = Vector2( 192, -192 )
+normal = ExtResource( 2 )
+pressed = ExtResource( 9 )
+action = "right"
+visibility_mode = 1
+
+[node name="other_buttons" type="HBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_top = -20.0
+
+[node name="shoot_button" type="TouchScreenButton" parent="other_buttons"]
+position = Vector2( -384, -192 )
+normal = ExtResource( 3 )
+pressed = ExtResource( 6 )
+action = "shoot"
+visibility_mode = 1
+
+[node name="jump_button" type="TouchScreenButton" parent="other_buttons"]
+position = Vector2( -192, -192 )
+normal = ExtResource( 7 )
+pressed = ExtResource( 4 )
+action = "jump"
+visibility_mode = 1
