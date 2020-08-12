@@ -11,7 +11,7 @@ var waves_set = {
 		enemies = [
 			{
 				name = "enemy_walk",
-				number = 2,
+				number = 1,
 				upgrade = 0
 			}
 		]
