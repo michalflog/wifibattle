@@ -27,7 +27,7 @@ func load_game():
 	
 func end_single_game():
 	game_config.change_game_pause()
-	signals.emit_show_accept_window("Flower has been destroyed", "Your score is ...")
+	signals.emit_show_accept_window("Flower has been destroyed", "Your score is " + String(points))
 	yield(signals, "accept_window_closed")
 	end_game()
 	game_config.change_game_pause()
@@ -51,16 +51,21 @@ func update_points():
 	
 func player_dead(copy_of_player : player):
 	player_copy = copy_of_player
+	
 	add_timer(3, "respawn")
+	get_tree().get_root().get_node("map").find_node("camera")._set_current(true)
 	pass
 	
 func respawn_player():
+	get_tree().get_root().get_node("map").find_node("camera")._set_current(false)
 	get_tree().get_root().get_node("map").call_deferred("add_child", player_copy)
+	player_copy.immute()
 	pass
 	
 func next_wave():
 	signals.next_wave()
 	wave += 1
+	signals.update_waves(wave)
 	pass
 	
 func add_timer(time : int, name : String):

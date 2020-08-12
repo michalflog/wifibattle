@@ -5,6 +5,7 @@ extends CanvasLayer
 func _ready():
 	signals.connect("update_flower_hp", self, "update_flower_hp")
 	signals.connect("update_points", self, "update_points")
+	signals.connect("update_waves", self, "update_waves")
 	signals.connect("timer_time", self, "timer_time")
 	pass # Replace with function body.
 
@@ -25,6 +26,10 @@ func timer_time(time):
 func update_points(points):
 	find_node("score").text = String(points)
 	$update_score.play("update_score")
+	pass
+	
+func update_waves(waves):
+	find_node("wave_num").text = String(waves)
 	pass
 	
 func play_deal_dmg():

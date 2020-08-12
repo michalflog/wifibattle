@@ -13,6 +13,16 @@ var waves_set = {
 				name = "enemy_speed",
 				number = 5,
 				upgrade = 0
+			},
+			{
+				name = "enemy_walk",
+				number = 5,
+				upgrade = 0
+			},
+			{
+				name = "enemy_fly",
+				number = 5,
+				upgrade = 0
 			}
 		]
 	},

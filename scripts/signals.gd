@@ -10,6 +10,7 @@ signal update_flower_hp(hp, max_hp)
 signal end_single_game
 signal add_points(points)
 signal update_points(points)
+signal update_waves(wave)
 signal next_wave
 signal enemy_dead
 signal player_dead(player_copy)
@@ -52,6 +53,9 @@ func add_points(points):
 
 func update_points(points):
 	emit_signal("update_points", points)
+	pass
+func update_waves(waves):
+	emit_signal("update_waves", waves)
 	pass
 	
 func next_wave():

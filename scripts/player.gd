@@ -4,6 +4,8 @@ class_name player
 
 export (PackedScene) var bullet_scene
 
+var reload_time = 0.25
+var current_reload_time = 0
 var move_speed = 200
 var jump_force = -500
 var gravity_force = 1000
@@ -12,6 +14,10 @@ var max_hp_points = 100
 var hp_points = 100
 var current_move_state = "stand"
 var damage = 25
+
+var immute_time = 3
+var current_immute_time = 0
+var is_immute = false
 
 var double_jump = false
 var flipped_left = false
@@ -26,6 +32,11 @@ func _process(delta):
 	
 	if not game_config.pause:
 		player_actions(delta)
+		
+		if current_immute_time > 0:
+			current_immute_time -= delta
+		else:
+			is_immute = false
 			
 		movement = move_and_slide(movement, Vector2(0, -1), true)
 			
@@ -76,7 +87,7 @@ func player_actions(delta):
 		else:
 			$animated_sprite.play("jump_down")
 	
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_just_pressed("shoot") and current_reload_time <= 0:
 		var bullet_position = $shoot_position.get_global_position()
 		var bullet_direction
 		if flipped_left:
@@ -84,7 +95,12 @@ func player_actions(delta):
 		else:
 			bullet_direction = 1
 			
+		current_reload_time = reload_time
+			
 		shoot_bullet(bullet_position, bullet_direction)
+		
+	if current_reload_time > 0:
+		current_reload_time -= delta
 	
 	if $hp_bar.value != hp_points:
 		set_hp(hp_points)
@@ -128,10 +144,11 @@ puppet func shoot_bullet(position, direction):
 	pass
 	
 func deal_dmg(dmg):
-	hp_points -= dmg
-	set_hp(hp_points)
-	if hp_points <= 0:
-		dead()
+	if !is_immute:
+		hp_points -= dmg
+		set_hp(hp_points)
+		if hp_points <= 0:
+			dead()
 	#single player deal_dmg
 	pass
 	
@@ -173,4 +190,10 @@ func set_player_stats(char_id):
 	hp_points = char_stats.get_health_value()
 	move_speed = char_stats.get_speed_value()
 	damage = char_stats.get_damage_value()
+	pass
+	
+func immute():
+	current_immute_time = immute_time
+	is_immute = true
+	$immute_animation.play("immute")
 	pass
