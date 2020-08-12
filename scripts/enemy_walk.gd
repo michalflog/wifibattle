@@ -5,8 +5,6 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
-	if is_on_wall():
-		move_direction *= -1
 	
 	animation_play()
 		

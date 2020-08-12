@@ -23,7 +23,9 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[node name="map" type="TileMap"]
+[node name="map" type="TileMap" groups=[
+"map",
+]]
 tile_set = ExtResource( 1 )
 collision_layer = 7
 collision_mask = 7
@@ -46,5 +48,4 @@ script = ExtResource( 14 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="spawn_point"]
 frames = SubResource( 1 )
-frame = 5
 playing = true

@@ -24,6 +24,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/enemy.gd"
 }, {
+"base": "enemy",
+"class": "enemy_fly",
+"language": "GDScript",
+"path": "res://scripts/enemy_fly.gd"
+}, {
+"base": "enemy",
+"class": "enemy_speed",
+"language": "GDScript",
+"path": "res://scripts/enemy_speed.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "player",
 "language": "GDScript",
@@ -43,6 +53,8 @@ _global_script_class_icons={
 "bullet": "",
 "character": "",
 "enemy": "",
+"enemy_fly": "",
+"enemy_speed": "",
 "player": "",
 "timer": "",
 "waves": ""

@@ -3,7 +3,9 @@ extends Position2D
 export var spawn_time = 2
 
 var enemies = {
-	enemy_walk = load("res://scenes/enemy_walk.tscn")
+	enemy_walk = load("res://scenes/enemy_walk.tscn"),
+	enemy_fly = load("res://scenes/enemy_fly.tscn"),
+	enemy_speed = load("res://scenes/enemy_speed.tscn")
 }
 
 var spawn_pause = true

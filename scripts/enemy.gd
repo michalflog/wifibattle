@@ -7,7 +7,6 @@ export var dmg = 20
 export var max_hp = 100
 export var movement_speed = 150
 export var gravity_force = 1000
-export var is_flying = false
 export var points = 5
 
 export var max_movement_speed = 300
@@ -28,9 +27,13 @@ func _ready():
 func _process(delta):
 	
 	if not game_config.pause:
-		if not is_flying:
-			movement.x = move_direction.x * movement_speed
-			movement.y += gravity_force * delta
+		
+		if is_on_wall():
+			move_direction *= -1
+			
+		$animated_sprite.flip_h = (move_direction.x == -1) 
+		movement.x = move_direction.x * movement_speed
+		movement.y += gravity_force * delta
 			
 		movement = move_and_slide(movement, Vector2(0, -1), true)
 	
@@ -67,7 +70,7 @@ func hit_box_trigger(area):
 	
 func upgrade(wave, enemie_upgrade):
 	var color_change = 0.25
-	var upgrade_amount = 3 / color_change * wave + enemie_upgrade
+	var upgrade_amount = wave + enemie_upgrade
 	var color_amount : float = enemie_upgrade * color_change
 	var color = Color(1 + color_amount, 1, 1)
 	var sprite : AnimatedSprite = find_node("animated_sprite")
