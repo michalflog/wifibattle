@@ -7,7 +7,7 @@ func _ready():
 
 var waves_set = {
 	1 : {
-		spawn_time = 2,
+		spawn_time = 1,
 		enemies = [
 			{
 				name = "enemy_walk",
@@ -21,8 +21,48 @@ var waves_set = {
 		enemies = [
 			{
 				name = "enemy_walk",
-				number = 4,
-				upgrade = 0
+				number = 1,
+				upgrade = 1
+			}
+		]
+	},
+	3 : {
+		spawn_time = 1,
+		enemies = [
+			{
+				name = "enemy_walk",
+				number = 1,
+				upgrade = 2
+			}
+		]
+	},
+	4 : {
+		spawn_time = 1,
+		enemies = [
+			{
+				name = "enemy_walk",
+				number = 1,
+				upgrade = 3
+			}
+		]
+	},
+	5 : {
+		spawn_time = 1,
+		enemies = [
+			{
+				name = "enemy_walk",
+				number = 1,
+				upgrade = 4
+			}
+		]
+	},
+	6 : {
+		spawn_time = 1,
+		enemies = [
+			{
+				name = "enemy_walk",
+				number = 1,
+				upgrade = 5 
 			}
 		]
 	}

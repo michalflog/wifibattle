@@ -53,13 +53,16 @@ func choose_enemy_to_spawn():
 	if current_wave.enemies[id].number == 0:
 		return choose_enemy_to_spawn()
 	current_wave.enemies[id].number -= 1
-	return enemies[current_wave.enemies[id].name]
+	return {enemie = enemies[current_wave.enemies[id].name], upgrade = current_wave.enemies[id].upgrade}
 	pass
 	
 func spawn_enemy():
-	var new_enemy : enemy = choose_enemy_to_spawn().instance()
+	var choosed_enemie = choose_enemy_to_spawn()
+	var new_enemy : enemy = choosed_enemie.enemie.instance()
 	new_enemy.move_direction = Vector2(spawn_direction, 0)
 	add_child(new_enemy)
+	new_enemy.upgrade(wave / (wave_set.size() + 1), choosed_enemie.upgrade)
+	new_enemy.update_hp_bar()
 	spawn_direction *= -1
 	current_spawned_enemies += 1
 	pass

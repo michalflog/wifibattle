@@ -10,6 +10,11 @@ export var gravity_force = 1000
 export var is_flying = false
 export var points = 5
 
+export var max_movement_speed = 300
+export var hp_multiplier = 1.1
+export var dmg_multiplier = 1.5
+export var movement_multiplier = 1.01
+
 var movement = Vector2(0,0)
 var move_direction = Vector2(0,0)
 
@@ -49,12 +54,34 @@ func dead():
 	pass
 	
 func update_hp_bar():
-	$hp_bar.value = hp
+	var hp_bar = find_node("hp_bar")
+	hp_bar.value = hp
+	hp_bar.max_value = max_hp
 	pass
 
 func hit_box_trigger(area):
 	if area.is_in_group("bullet"):
 		var new_bullet : bullet = area 
 		take_damage(new_bullet.bullet_dmg)
+	pass
+	
+func upgrade(wave, enemie_upgrade):
+	var color_change = 0.25
+	var upgrade_amount = 3 / color_change * wave + enemie_upgrade
+	var color_amount : float = enemie_upgrade * color_change
+	var color = Color(1 + color_amount, 1, 1)
+	var sprite : AnimatedSprite = find_node("animated_sprite")
+	sprite.set_modulate(color)
+	
+	hp = hp * pow(hp_multiplier, upgrade_amount)
+	max_hp = hp
+	update_hp_bar()
+	
+	dmg = dmg * pow(dmg_multiplier, upgrade_amount)
+	movement_speed = movement_speed * pow(movement_multiplier, upgrade_amount)
+	
+	if movement_speed > max_movement_speed:
+		movement_speed = max_movement_speed
+	
 	pass
 
