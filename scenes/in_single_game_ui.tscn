@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://gfx/button_arrow_right_pressed.png" type="Texture" id=1]
 [ext_resource path="res://gfx/button_shoot_pressed.png" type="Texture" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://gfx/HpBarProgress.png" type="Texture" id=12]
 [ext_resource path="res://scripts/in_single_game_ui.gd" type="Script" id=13]
 [ext_resource path="res://fonts/Bungee-Regular.ttf" type="DynamicFontData" id=14]
+[ext_resource path="res://scenes/power_ups.tscn" type="PackedScene" id=15]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -296,3 +297,5 @@ anims/update_score = SubResource( 6 )
 
 [node name="timer_change" type="AnimationPlayer" parent="."]
 anims/timer_count = SubResource( 7 )
+
+[node name="power_ups" parent="." instance=ExtResource( 15 )]

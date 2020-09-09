@@ -3,8 +3,19 @@ extends Area2D
 export var hp = 100
 export var max_hp = 100
 
+export var power_up_max_hp = 20
+
 func _ready():
-	pass # Replace with function body.
+	signals.connect("power_up_flower", self, "_power_up_flower")
+
+func _power_up_flower(what):
+	match what:
+		"hp":
+			max_hp += power_up_max_hp
+			signals.update_flower_hp(hp, max_hp)
+		"recover":
+			hp = max_hp
+			signals.update_flower_hp(hp, max_hp)
 
 func deal_dmg(dmg):
 	hp -= dmg

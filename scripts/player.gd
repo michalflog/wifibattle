@@ -3,19 +3,21 @@ extends KinematicBody2D
 class_name player
 
 export (PackedScene) var bullet_scene
+export var power_up_dmg = 5
+export var power_up_hp = 10
 
-var reload_time = 0.25
+export var reload_time = 0.25
 var current_reload_time = 0
-var move_speed = 200
+export var move_speed = 200
 var jump_force = -500
-var gravity_force = 1000
+export var gravity_force = 1000
 var movement = Vector2()
 var max_hp_points = 100
 var hp_points = 100
 var current_move_state = "stand"
-var damage = 25
+export var damage = 25
 
-var immute_time = 3
+export var immute_time = 3
 var current_immute_time = 0
 var is_immute = false
 
@@ -25,6 +27,7 @@ var flipped_left = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$hit_box.connect("area_entered", self, "hit_box_trigger")
+	signals.connect("power_up_player", self, "power_up_player")
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -131,6 +134,7 @@ func jump():
 	
 func set_hp(hp):
 	$hp_bar.value = hp
+	$hp_bar.max_value = max_hp_points
 	pass
 	
 puppet func shoot_bullet(position, direction):
@@ -142,13 +146,23 @@ puppet func shoot_bullet(position, direction):
 	bullet.set_network_master(get_network_master())
 	get_tree().get_root().add_child(bullet)
 	pass
-	
+
+func power_up_player(what):
+	match what:
+		"dmg":
+			damage += power_up_dmg
+		"hp":
+			max_hp_points += power_up_hp
+			hp_points = max_hp_points
+
 func deal_dmg(dmg):
 	if !is_immute:
 		hp_points -= dmg
 		set_hp(hp_points)
 		if hp_points <= 0:
 			dead()
+			return
+		immute()
 	#single player deal_dmg
 	pass
 	

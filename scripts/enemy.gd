@@ -69,7 +69,7 @@ func hit_box_trigger(area):
 	pass
 	
 func upgrade(wave, enemie_upgrade):
-	var color_change = 0.25
+	var color_change = 1
 	var upgrade_amount = wave + enemie_upgrade
 	var color_amount : float = enemie_upgrade * color_change
 	var color = Color(1 + color_amount, 1, 1)

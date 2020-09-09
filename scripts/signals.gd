@@ -17,6 +17,10 @@ signal player_dead(player_copy)
 signal timeout(timeout_name)
 signal timer_time(time)
 signal end_timer
+signal power_up_player(what)
+signal power_up_flower(what)
+signal power_up_chosen
+signal power_up_pop_up
 
 func emit_show_accept_window(title, text, close_on = 0):
 	emit_signal("show_accept_window", title, text, close_on)

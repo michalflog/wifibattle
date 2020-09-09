@@ -20,6 +20,7 @@ func update_flower_hp(hp, max_hp):
 func timer_time(time):
 	find_node("timer_name").text = single_game.current_timer.timer_name.replace("_", " ")
 	find_node("timer").text = String(time)
+	$timer_change.stop()
 	$timer_change.play("timer_count")
 	pass
 

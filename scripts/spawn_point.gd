@@ -88,6 +88,8 @@ func start_next_wave():
 	pass
 	
 func end_wave():
+	signals.emit_signal("power_up_pop_up")
+	yield(signals, "power_up_chosen")
 	next_wave_timer()
 	pass
 	

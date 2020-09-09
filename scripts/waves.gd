@@ -11,19 +11,19 @@ var waves_set = {
 		enemies = [
 			{
 				name = "enemy_speed",
-				number = 5,
+				number = 2,
 				upgrade = 0
 			},
-			{
-				name = "enemy_walk",
-				number = 5,
-				upgrade = 0
-			},
-			{
-				name = "enemy_fly",
-				number = 5,
-				upgrade = 0
-			}
+#			{
+#				name = "enemy_walk",
+#				number = 5,
+#				upgrade = 0
+#			},
+#			{
+#				name = "enemy_fly",
+#				number = 5,
+#				upgrade = 0
+#			}
 		]
 	},
 #	2 : {
