@@ -9,6 +9,7 @@ signal server_closed
 signal close_connection
 signal hide_game_lobby
 signal show_multi_game_lobby
+signal set_multi_start_button(val)
 
 var udp = PacketPeerUDP.new()
 var peer : NetworkedMultiplayerENet
@@ -122,7 +123,7 @@ func close_connection():
 
 remote func add_player(name):
 	var id = get_tree().get_rpc_sender_id()
-	players[id] = {"name": name, "points": 0, "char_id": 0}
+	players[id] = {"name": name, "points": 0, "char_id": 0, "ready": false}
 	emit_signal("update_players_list")
 	pass
 	
@@ -190,6 +191,27 @@ func join_game(address):
 remote func change_player_character(id):
 	var p_id = get_tree().get_rpc_sender_id()
 	players[p_id].char_id = id
+	pass
+	
+remote func player_ready_to_start(ready):
+	var id = get_tree().get_rpc_sender_id()
+	print_debug(id)
+	players[id].ready = ready
+	check_if_can_start_game()
+	pass
+	
+func check_if_can_start_game():
+	if check_if_players_ready_to_start_game() and game_config.char_available():
+		emit_signal("set_multi_start_button", false)
+	else:
+		emit_signal("set_multi_start_button", true)
+	pass
+	
+func check_if_players_ready_to_start_game():
+	for pl in players:
+		if pl != 1 and !players[pl].ready:
+			return false
+	return true
 	pass
 	
 func load_game():

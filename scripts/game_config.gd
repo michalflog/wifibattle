@@ -6,6 +6,7 @@ var rand = RandomNumberGenerator.new()
 var close_accept_window_val = 0
 var audio_on = true
 var pause = false
+var config_data
 
 func _ready():
 	characters.append(character.new(2, 2, 2, "blue"))
@@ -13,6 +14,8 @@ func _ready():
 	characters.append(character.new(3, 2, 1, "red"))
 	characters.append(character.new(2, 1, 3, "gray"))
 	rand.randomize()
+	check_config_file()
+	load_config_file()
 	pass
 	
 func _finalize():
@@ -38,8 +41,49 @@ func show_quit_window():
 	
 func change_audio():
 	audio_on = !audio_on
+	AudioServer.set_bus_mute(0, audio_on)
 	signals.emit_audio_change()
 	
 func change_game_pause():
 	pause = !pause
 	signals.change_pause()
+
+func save_config_file(highscore = null, best_wave = null):
+	if highscore != null:
+		if config_data.highscore < highscore:
+			config_data.highscore = highscore
+	if best_wave != null:
+		if config_data.best_wave < best_wave:
+			config_data.best_wave = best_wave
+	var config_file = File.new()
+	config_file.open("user://config_file.save", File.WRITE)
+	config_file.store_string(to_json(config_data))
+	config_file.close()
+	pass
+
+func check_config_file():
+	var config_file = File.new()
+	if !config_file.file_exists("user://config_file.save"):
+		config_file.open("user://config_file.save", File.WRITE)
+		var config_dictionary = {
+			highscore = 0,
+			best_wave = 0,
+			unlocked_all = false
+		}
+		config_file.store_string(to_json(config_dictionary))
+	config_file.close()
+	pass
+	
+func load_config_file():
+	var config_file = File.new()
+	if config_file.file_exists("user://config_file.save"):
+		config_file.open("user://config_file.save", File.READ)
+		config_data = parse_json(config_file.get_as_text())
+	config_file.close()
+	pass
+	
+func char_available():
+	if char_id * 25 <= game_config.config_data.best_wave or game_config.config_data.unlocked_all:
+		return true
+	return false
+	pass

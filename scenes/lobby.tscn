@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://scripts/lobby.gd" type="Script" id=1]
 [ext_resource path="res://gfx/background_200_200.png" type="Texture" id=2]
@@ -50,6 +50,12 @@
 [ext_resource path="res://gfx/button_load_game_pressed.png" type="Texture" id=48]
 [ext_resource path="res://gfx/button_boost_normal.png" type="Texture" id=49]
 [ext_resource path="res://gfx/button_load_game_disabled.png" type="Texture" id=50]
+[ext_resource path="res://gfx/button_start_disabled.png" type="Texture" id=51]
+[ext_resource path="res://gfx/button_start_game_disabled.png" type="Texture" id=52]
+[ext_resource path="res://fonts/font_20.tres" type="DynamicFont" id=53]
+[ext_resource path="res://gfx/button_ready_pressed.png" type="Texture" id=54]
+[ext_resource path="res://gfx/button_ready_disabled.png" type="Texture" id=55]
+[ext_resource path="res://gfx/button_ready_normal.png" type="Texture" id=56]
 
 [sub_resource type="DynamicFont" id=1]
 size = 20
@@ -200,6 +206,27 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource( 19 )
 
+[node name="unavailable_text" type="Label" parent="single_lobby/HBoxContainer/VBoxContainer2/HBoxContainer/character"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -62.0
+margin_top = -53.5
+margin_right = 62.0
+margin_bottom = 53.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+custom_fonts/font = ExtResource( 53 )
+align = 1
+valign = 1
+autowrap = true
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="choose_right" type="TextureButton" parent="single_lobby/HBoxContainer/VBoxContainer2/HBoxContainer"]
 margin_left = 308.0
 margin_top = 36.0
@@ -249,8 +276,10 @@ margin_bottom = 191.0
 size_flags_horizontal = 4
 texture_normal = ExtResource( 46 )
 texture_pressed = ExtResource( 47 )
+texture_disabled = ExtResource( 52 )
 
 [node name="load_game_button" type="TextureButton" parent="single_lobby/HBoxContainer/VBoxContainer"]
+visible = false
 margin_left = 9.0
 margin_top = 211.0
 margin_right = 288.0
@@ -262,9 +291,9 @@ texture_pressed = ExtResource( 48 )
 texture_disabled = ExtResource( 50 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="single_lobby/HBoxContainer/VBoxContainer"]
-margin_top = 302.0
+margin_top = 211.0
 margin_right = 297.0
-margin_bottom = 404.0
+margin_bottom = 313.0
 custom_constants/separation = 10
 
 [node name="boost_button" type="TextureButton" parent="single_lobby/HBoxContainer/VBoxContainer/VBoxContainer2"]
@@ -299,9 +328,9 @@ text = "0"
 
 [node name="back_button" type="TextureButton" parent="single_lobby/HBoxContainer/VBoxContainer"]
 margin_left = 74.0
-margin_top = 424.0
+margin_top = 333.0
 margin_right = 223.0
-margin_bottom = 493.0
+margin_bottom = 402.0
 size_flags_horizontal = 4
 texture_normal = ExtResource( 14 )
 texture_pressed = ExtResource( 13 )
@@ -522,8 +551,7 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="multi_game_lobby/HBoxContainer"]
-margin_left = 93.0
-margin_right = 529.0
+margin_right = 436.0
 margin_bottom = 438.0
 custom_constants/separation = 40
 alignment = 1
@@ -561,6 +589,27 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource( 19 )
 
+[node name="unavailable_text" type="Label" parent="multi_game_lobby/HBoxContainer/VBoxContainer/HBoxContainer/character"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -62.0
+margin_top = -53.5
+margin_right = 62.0
+margin_bottom = 53.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+custom_fonts/font = ExtResource( 53 )
+align = 1
+valign = 1
+autowrap = true
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="choose_right" type="TextureButton" parent="multi_game_lobby/HBoxContainer/VBoxContainer/HBoxContainer"]
 margin_left = 308.0
 margin_top = 36.0
@@ -576,8 +625,8 @@ margin_top = 365.0
 margin_bottom = 438.0
 
 [node name="container" type="VBoxContainer" parent="multi_game_lobby/HBoxContainer"]
-margin_left = 549.0
-margin_right = 930.0
+margin_left = 456.0
+margin_right = 1077.0
 margin_bottom = 438.0
 custom_constants/separation = 20
 __meta__ = {
@@ -585,7 +634,7 @@ __meta__ = {
 }
 
 [node name="label" type="Label" parent="multi_game_lobby/HBoxContainer/container"]
-margin_right = 381.0
+margin_right = 621.0
 margin_bottom = 41.0
 custom_fonts/font = ExtResource( 3 )
 text = "Players"
@@ -594,7 +643,7 @@ valign = 1
 
 [node name="players_list" type="ItemList" parent="multi_game_lobby/HBoxContainer/container"]
 margin_top = 61.0
-margin_right = 381.0
+margin_right = 621.0
 margin_bottom = 349.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -602,7 +651,7 @@ custom_fonts/font = ExtResource( 3 )
 
 [node name="buttons" type="HBoxContainer" parent="multi_game_lobby/HBoxContainer/container"]
 margin_top = 369.0
-margin_right = 381.0
+margin_right = 621.0
 margin_bottom = 438.0
 custom_constants/separation = 60
 alignment = 1
@@ -620,6 +669,15 @@ margin_bottom = 69.0
 disabled = true
 texture_normal = ExtResource( 16 )
 texture_pressed = ExtResource( 17 )
+texture_disabled = ExtResource( 51 )
+
+[node name="game_ready_button" type="TextureButton" parent="multi_game_lobby/HBoxContainer/container/buttons"]
+margin_left = 441.0
+margin_right = 621.0
+margin_bottom = 69.0
+texture_normal = ExtResource( 56 )
+texture_pressed = ExtResource( 54 )
+texture_disabled = ExtResource( 55 )
 
 [node name="menu" type="TextureRect" parent="."]
 visible = false
@@ -822,6 +880,7 @@ texture_pressed = ExtResource( 30 )
 [connection signal="pressed" from="multi_game_lobby/HBoxContainer/VBoxContainer/HBoxContainer/choose_right" to="." method="_on_choose_right_pressed"]
 [connection signal="pressed" from="multi_game_lobby/HBoxContainer/container/buttons/game_back_button" to="." method="_on_game_back_button_pressed"]
 [connection signal="pressed" from="multi_game_lobby/HBoxContainer/container/buttons/game_start_button" to="." method="_on_game_start_button_pressed"]
+[connection signal="pressed" from="multi_game_lobby/HBoxContainer/container/buttons/game_ready_button" to="." method="_on_game_ready_button_pressed"]
 [connection signal="pressed" from="menu/rect/VBoxContainer/end_game_button" to="." method="_on_end_game_button_pressed"]
 [connection signal="pressed" from="menu/rect/VBoxContainer/exit_game_button" to="." method="_on_exit_game_button_pressed"]
 [connection signal="pressed" from="menu/rect/VBoxContainer/sound_button" to="." method="_on_sound_button_pressed"]

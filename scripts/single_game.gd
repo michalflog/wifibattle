@@ -27,6 +27,7 @@ func load_game():
 	
 func end_single_game():
 	game_config.change_game_pause()
+	game_config.save_config_file(points, wave)
 	signals.emit_show_accept_window("Flower has been destroyed", "Your score is " + String(points))
 	yield(signals, "accept_window_closed")
 	end_game()

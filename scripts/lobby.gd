@@ -12,6 +12,8 @@ export (Texture) var audio_off
 
 var characters = []
 
+var multi_is_ready = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	multi_game.connect("server_created", self, "server_created")
@@ -26,6 +28,7 @@ func _ready():
 	signals.connect("show_accept_window", self, "show_accept_dialog")
 	signals.connect("show_single_lobby", self, "show_single_lobby")
 	signals.connect("hide_single_lobby", self, "hide_single_lobby")
+	multi_game.connect("set_multi_start_button", self, "set_multi_start_button")
 	characters.append(blue_player)
 	characters.append(green_player)
 	characters.append(red_player)
@@ -52,7 +55,7 @@ func update_servers_list():
 	$servers_lobby.find_node("servers_list").clear()
 	var servers = multi_game.servers
 	for srv in servers:
-		$servers_lobby.find_node("servers_list").add_item(servers[srv] + " (" + srv + ")")
+		$servers_lobby.find_node("servers_list").add_item(servers[srv])# + " (" + srv + ")")
 	pass
 
 func update_players_list():
@@ -61,10 +64,12 @@ func update_players_list():
 	var players = multi_game.players
 	for p in players:
 		$multi_game_lobby.find_node("players_list").add_item(players[p].name + " [" + str(players[p].points) + "]")
-	if get_tree().is_network_server() and players.size() + 1 >= 2:
-		$multi_game_lobby.find_node("game_start_button").disabled = false
+	if get_tree().is_network_server():
+		$multi_game_lobby.find_node("game_ready_button").visible = false
+		multi_game.check_if_can_start_game()
 	else:
-		$multi_game_lobby.find_node("game_start_button").disabled = true 
+		$multi_game_lobby.find_node("game_start_button").visible = false 
+		$multi_game_lobby.find_node("game_ready_button").visible = true
 		
 	#$multi_game_lobby.find_node("game_start_button").disabled = false
 	pass
@@ -102,22 +107,25 @@ func show_multi_game_lobby():
 	$multi_game_lobby.show()
 	pass
 	
-
 func show_single_lobby():
 	game_config.char_id = 0
 	change_single_character(0)
+	$single_lobby.find_node("highscore").text = String(game_config.config_data.highscore)
 	$single_lobby.show()
 	pass
 
 func change_multi_character(val):
-	game_config.char_id += val
-	if game_config.char_id < 0:
-		game_config.char_id = 3
-	if game_config.char_id > 3:
-		game_config.char_id = 0
-	$multi_game_lobby.find_node("character").texture = characters[game_config.char_id]
-	set_multi_character_properties()
-	multi_game.rpc("change_player_character", game_config.char_id)
+	if !multi_is_ready:
+		game_config.char_id += val
+		if game_config.char_id < 0:
+			game_config.char_id = 3
+		if game_config.char_id > 3:
+			game_config.char_id = 0
+		$multi_game_lobby.find_node("character").texture = characters[game_config.char_id]
+		check_if_multi_character_available(game_config.char_id)
+		set_multi_character_properties()
+		multi_game.rpc("change_player_character", game_config.char_id)
+		multi_game.check_if_can_start_game()
 	pass
 	
 func change_single_character(val):
@@ -127,7 +135,37 @@ func change_single_character(val):
 	if game_config.char_id > 3:
 		game_config.char_id = 0
 	$single_lobby.find_node("character").texture = characters[game_config.char_id]
+	check_if_single_character_available(game_config.char_id)
 	set_single_character_properties()
+	pass
+	
+func check_if_single_character_available(char_id):
+	if char_id * 25 <= game_config.config_data.best_wave or game_config.config_data.unlocked_all:
+		#print_debug("available")
+		$single_lobby.find_node("start_game_button").disabled = false
+		$single_lobby.find_node("character").self_modulate = Color(1, 1, 1)
+		$single_lobby.find_node("unavailable_text").text = ""
+	else:
+		#print_debug("not_available")
+		$single_lobby.find_node("start_game_button").disabled = true
+		$single_lobby.find_node("character").self_modulate = Color(0.25, 0.25, 0.25)
+		$single_lobby.find_node("unavailable_text").text = "To unlock reach %s wave" % (char_id * 25)
+	pass
+	
+func check_if_multi_character_available(char_id):
+	if char_id * 25 <= game_config.config_data.best_wave or game_config.config_data.unlocked_all:
+		$multi_game_lobby.find_node("game_ready_button").disabled = false
+		$multi_game_lobby.find_node("character").self_modulate = Color(1, 1, 1)
+		$multi_game_lobby.find_node("unavailable_text").text = ""
+	else:
+		$multi_game_lobby.find_node("game_ready_button").disabled = true
+		$multi_game_lobby.find_node("character").self_modulate = Color(0.25, 0.25, 0.25)
+		$multi_game_lobby.find_node("unavailable_text").text = "To unlock reach %s wave in single" % (char_id * 25)
+	
+	pass
+	
+func set_multi_start_button(value):
+	$multi_game_lobby.find_node("game_start_button").disabled = value
 	pass
 
 func set_multi_character_properties():
@@ -293,4 +331,16 @@ func _on_start_game_button_pressed():
 func _on_single_back_button_pressed():
 	show_main_lobby()
 	hide_single_lobby()
+	pass # Replace with function body.
+
+func _on_game_ready_button_pressed():
+	if multi_is_ready:
+		$multi_game_lobby.find_node("game_ready_button").modulate = Color(1,1,1)
+		multi_is_ready = false
+	else:
+		$multi_game_lobby.find_node("game_ready_button").modulate = Color(1,2,1)
+		multi_is_ready = true
+	
+	multi_game.rpc_id(1, "player_ready_to_start", multi_is_ready)
+		
 	pass # Replace with function body.
