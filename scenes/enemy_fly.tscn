@@ -24,6 +24,7 @@ animations = [ {
 collision_layer = 4
 collision_mask = 2
 script = ExtResource( 7 )
+enemy_name = "enemy_fly"
 hp = 50
 max_hp = 50
 movement_speed = 100
@@ -43,7 +44,7 @@ __meta__ = {
 [node name="animated_sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "fly"
-frame = 3
+frame = 2
 playing = true
 
 [node name="hp_bar" type="TextureProgress" parent="."]

@@ -6,6 +6,8 @@ var points = 0
 var wave = 0
 var player_copy : player
 var current_timer : timer
+var power_up_each_x_waves = 5
+
 
 func _ready():
 	map_scene = preload("res://scenes/single_tile_map.tscn")
@@ -35,6 +37,7 @@ func end_single_game():
 	pass
 	
 func end_game():
+	game_config.save_config_file(points, wave)
 	points = 0
 	wave = 0
 	signals.show_single_lobby()
@@ -58,7 +61,8 @@ func player_dead(copy_of_player : player):
 	pass
 	
 func respawn_player():
-	get_tree().get_root().get_node("map").find_node("camera")._set_current(false)
+	if get_tree().get_root().get_node("map").has_node("camera"):
+		get_tree().get_root().get_node("map").find_node("camera")._set_current(false)
 	get_tree().get_root().get_node("map").call_deferred("add_child", player_copy)
 	player_copy.immute()
 	pass
@@ -71,6 +75,9 @@ func next_wave():
 	
 func add_timer(time : int, name : String):
 	if current_timer == null:
+		if name == "next_wave" and wave != 0 and wave % 5 == 0:
+			signals.emit_signal("power_up_pop_up")
+			yield(signals, "power_up_chosen")
 		current_timer = timer.new(time, name)
 		add_child(current_timer)
 	else:
@@ -85,13 +92,14 @@ func add_timer(time : int, name : String):
 	pass
 	
 func end_timer():
-	match current_timer.timer_name:
-		"respawn":
-			respawn_player()
-		"next_wave":
-			next_wave()
-	current_timer.queue_free()
-	current_timer = null
+	if current_timer != null:
+		match current_timer.timer_name:
+			"respawn":
+				respawn_player()
+			"next_wave":
+				next_wave()
+		current_timer.queue_free()
+		current_timer = null
 	pass
 	
 func save_game():

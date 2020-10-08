@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 class_name enemy
 
+export var enemy_name = "enemy"
+
 export var hp = 100
 export var dmg = 20
 export var max_hp = 100
@@ -69,7 +71,7 @@ func hit_box_trigger(area):
 	pass
 	
 func upgrade(wave, enemie_upgrade):
-	var color_change = 1
+	var color_change = 0.5
 	var upgrade_amount = wave + enemie_upgrade
 	var color_amount : float = enemie_upgrade * color_change
 	var color = Color(1 + color_amount, 1, 1)

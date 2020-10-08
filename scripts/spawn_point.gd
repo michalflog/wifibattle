@@ -8,11 +8,13 @@ var enemies = {
 	enemy_speed = load("res://scenes/enemy_speed.tscn")
 }
 
+var enemies_max_uprade = {}
+
 var spawn_pause = true
 
 var wave = 0
 var enemy_upgrade
-var wave_set
+var wave_set = {}
 var current_wave
 
 var spawn_direction = 1
@@ -24,6 +26,7 @@ func _ready():
 	signals.connect("next_wave", self, "next_wave")
 	signals.connect("enemy_dead", self, "enemy_dead")
 	wave_set = waves.new().waves_set
+	check_enemies_max_upgrade()
 	next_wave_timer()
 	pass # Replace with function body.
 
@@ -32,6 +35,12 @@ func _process(delta):
 		check_spawn_time(delta)
 	pass
 	
+func check_enemies_max_upgrade():
+	for enemie_name in enemies:
+		for enemie in wave_set[wave_set.size()].enemies:
+			if enemie.name == enemie_name:
+				enemies_max_uprade[enemie_name] = enemie.upgrade
+
 func check_spawn_time(delta):
 	if current_spawn_time <= 0:
 		if check_if_more_enemies_to_spawn():
@@ -63,7 +72,8 @@ func spawn_enemy():
 	var new_enemy : enemy = choosed_enemie.enemie.instance()
 	new_enemy.move_direction = Vector2(spawn_direction, 0)
 	add_child(new_enemy)
-	new_enemy.upgrade(wave / (wave_set.size() + 1), choosed_enemie.upgrade)
+	var wave_based_upgrade = wave / (wave_set.size() + 1) + int(((wave / (wave_set.size() + 1)) > 0)) * enemies_max_uprade[new_enemy.enemy_name]
+	new_enemy.upgrade(wave_based_upgrade, choosed_enemie.upgrade)
 	new_enemy.update_hp_bar()
 	spawn_direction *= -1
 	current_spawned_enemies += 1
@@ -88,8 +98,8 @@ func start_next_wave():
 	pass
 	
 func end_wave():
-	signals.emit_signal("power_up_pop_up")
-	yield(signals, "power_up_chosen")
+#	signals.emit_signal("power_up_pop_up")
+#	yield(signals, "power_up_chosen")
 	next_wave_timer()
 	pass
 	

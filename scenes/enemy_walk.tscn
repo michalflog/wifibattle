@@ -28,6 +28,7 @@ animations = [ {
 collision_layer = 4
 collision_mask = 2
 script = ExtResource( 7 )
+enemy_name = "enemy_walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -43,7 +44,6 @@ __meta__ = {
 [node name="animated_sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "run"
-frame = 1
 playing = true
 
 [node name="hp_bar" type="TextureProgress" parent="."]
